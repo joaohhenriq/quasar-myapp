@@ -1,10 +1,17 @@
 <template>
   <q-page padding>
-    <input v-model="message" @keyup.esc="clearMessage" @keyup.enter="alertMessage" />
+    <input
+      v-model="message"
+      @keyup.esc="clearMessage"
+      @keyup.enter="alertMessage"
+      v-autofocus
+      :style="errorStyle"
+    />
     <button @click="clearMessage">Clear</button>
     <h5 class="border-grey" v-show="message.length">{{message}}</h5>
     <h5 v-if="message.length">Test if</h5>
     <h6 v-else>Test else</h6>
+    <div>{{message.length}}</div>
 
     <hr />
     <p>Uppercase: {{messageUppercase}}</p>
@@ -22,6 +29,14 @@ export default {
   computed: {
     messageUppercase() {
       return this.message.toUpperCase();
+    },
+    errorStyle() {
+      if (this.message.length > 22) {
+        return {
+          color: "red",
+          background: "pink"
+        };
+      }
     }
   },
   methods: {
@@ -36,6 +51,13 @@ export default {
     messageLowercase(value) {
       return value.toLowerCase();
     }
+  },
+  directives: {
+    autofocus: {
+      inserted(el) {
+        el.focus();
+      }
+    }
   }
 };
 </script>
@@ -43,5 +65,9 @@ export default {
 <style>
 .border-grey {
   border: 1px solid grey;
+}
+.error {
+  color: red;
+  background: pink;
 }
 </style>
