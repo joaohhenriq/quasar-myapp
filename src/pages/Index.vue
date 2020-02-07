@@ -1,12 +1,14 @@
 <template>
   <q-page padding>
     <ul>
-      <li v-for="task in tasks" :key="task">{{task}}</li>
+      <li v-for="task in tasks">{{task}}</li>
     </ul>
     <hr />
     <ul>
-      <li v-for="test in tests" :key="test">{{test.name}}, {{test.dueDate}}, {{test.dueTime}}</li>
+      <li v-for="test in tests" :key="test.name">{{test.name}}, {{test.dueDate}}, {{test.dueTime}}</li>
     </ul>
+    <hr />
+    <task v-for="test in tests" :key="test.name" :prop="test">{{test.name}}</task>
   </q-page>
 </template>
 
@@ -33,6 +35,9 @@ export default {
         }
       ]
     };
+  },
+  components: {
+    task: require("../components/Task.vue").default
   }
 };
 </script>
