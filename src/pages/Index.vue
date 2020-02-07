@@ -6,6 +6,7 @@
       @keyup.enter="alertMessage"
       v-autofocus
       :style="errorStyle"
+      ref="messageInput"
     />
     <button @click="clearMessage">Clear</button>
     <h5 class="border-grey" v-show="message.length">{{message}}</h5>
@@ -69,7 +70,8 @@ export default {
     console.log("beforeMount");
   },
   mounted() {
-    console.log("mounted");
+    console.log(this.$refs);
+    this.$refs.messageInput.className = "bg-green";
   },
   beforeUpdate() {
     console.log("beforeUpdate");
